@@ -5,6 +5,8 @@ import toursData from "../data/tours.json";
 import BestTours from "../Components/BestTours";
 import Reviews from "../Components/Reviews";
 import Footer from "../Components/Footer";
+import { useNavigate } from "react-router-dom";
+
 
 export default function TourDetail() {
   const { id } = useParams();
@@ -12,6 +14,7 @@ export default function TourDetail() {
 
   const [openDay, setOpenDay] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate();
 
   // Auto slideshow every 5s
   useEffect(() => {
@@ -72,12 +75,12 @@ export default function TourDetail() {
           <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg text-center">
             {tour.title}
           </h1>
-          <Link
-            to="#booking"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded shadow transition"
-          >
-            Book Now
-          </Link>
+          <button
+          onClick={() => navigate(`/booking/${tour.id}`)}
+          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded shadow transition"
+        >
+          Book Now
+        </button>
         </div>
 
         {/* Prev / Next Buttons */}
@@ -284,9 +287,12 @@ export default function TourDetail() {
               <span className="font-semibold">Price: </span>
               <span className="text-green-600 font-bold">{tour.price}</span>
             </div>
-            <button className="w-full mt-4 bg-blue-600 text-white px-6 py-3 rounded font-semibold hover:bg-blue-700 transition">
-              Book Now
-            </button>
+            <button
+            onClick={() => navigate(`/booking/${tour.id}`)}
+            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded shadow transition"
+          >
+            Book Now
+          </button>
           </div>
 
           {/* Trip Facts */}
